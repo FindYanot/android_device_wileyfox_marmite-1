@@ -10,4 +10,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bluetooth.nap=true \
     ro.qualcomm.bluetooth.opp=true \
     ro.qualcomm.bluetooth.pbap=true \
+    bluetooth.hfp.client=1 \
     ro.qualcomm.bt.hci_transport=smd

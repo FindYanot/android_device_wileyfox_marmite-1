@@ -44,5 +44,4 @@ PRODUCT_COPY_FILES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196609 \
-    ro.sf.lcd_density=320
+    ro.opengles.version=196609 
