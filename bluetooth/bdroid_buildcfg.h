@@ -18,7 +18,7 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTM_DEF_LOCAL_NAME   "Redmi"
+#define BTM_DEF_LOCAL_NAME   "Swift 2"
 
 #define BLE_VND_INCLUDED   TRUE
 #define BT_CLEAN_TURN_ON_DISABLED 1
