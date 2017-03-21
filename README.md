@@ -1,5 +1,5 @@
-# Device Tree for Wileyfox Swift 2 / 2 Plus/ 2X (marmite)
+# Device Tree for Wileyfox Swift 2 / 2 Plus (marmite)
 
-Wileyfox Swift 2/2 Plus/2X (codenamed "marmite") is smartphone from Wileyfox. 
+Wileyfox Swift 2/2 Plus (codenamed "marmite") is smartphone from Wileyfox. 
 It was released in October 2016.
 
