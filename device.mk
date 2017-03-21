@@ -60,4 +60,4 @@ include $(CM_PATH)/cyanogen/livedisplay.mk
 include $(LOCAL_PATH)/product/*.mk
 
 # Inherit proprietary files
-$(call inherit-product-if-exists, vendor/xiaomi/land/land-vendor.mk)
+$(call inherit-product-if-exists, vendor/wileyfox/marmite/marmite-vendor.mk)

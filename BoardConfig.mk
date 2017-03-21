@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/xiaomi/land
+DEVICE_PATH := device/wileyfox/marmite
 CM_PATH := vendor/cm/config/board
 
 # Define platform before including any common things
@@ -60,4 +60,4 @@ include $(CM_PATH)/cyanogen/hardware.mk
 include $(DEVICE_PATH)/board/*.mk
 
 # Inherit the proprietary files
--include vendor/xiaomi/land/BoardConfigVendor.mk
+-include vendor/wileyfox/marmite/BoardConfigVendor.mk

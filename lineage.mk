@@ -28,18 +28,18 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 # Inherit from land device
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
-PRODUCT_BRAND := Xiaomi
-PRODUCT_DEVICE := land
-PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_NAME := lineage_land
+PRODUCT_BRAND := Wileyfox
+PRODUCT_DEVICE := marmite
+PRODUCT_MANUFACTURER := Wileyfox
+PRODUCT_NAME := lineage_marmite
 
-PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+PRODUCT_GMS_CLIENTID_BASE := android-marmite
 
-TARGET_VENDOR_PRODUCT_NAME := land
+TARGET_VENDOR_PRODUCT_NAME := marmite
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_FINGERPRINT=Xiaomi/land/land:6.0.1/MMB29M/7.2.9:user/release-keys \
-    PRIVATE_BUILD_DESC="land-user 6.0.1 MMB29M 7.2.9 release-keys"
+    BUILD_FINGERPRINT=Wileyfox/Swift2/marmite:6.0.1/MHC19Q/ZNH2KAS7EB:user/release-keys \
+    PRIVATE_BUILD_DESC="Swift2-user 6.0.1 MHC19Q ZNH2KAS7EB release-keys"
 
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
     ro.product.model

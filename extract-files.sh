@@ -17,8 +17,8 @@
 
 set -e
 
-DEVICE=land
-VENDOR=xiaomi
+DEVICE=marmite
+VENDOR=wileyfox
 
 # Load extractutils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
