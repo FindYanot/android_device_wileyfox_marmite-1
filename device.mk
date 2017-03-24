@@ -22,6 +22,9 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvi
 # Get non-open-source specific aspects
 $(call inherit-product-if-exists, vendor/wileyfox/marmite/marmite-vendor.mk)
 
+# Inherit the rest from msm8937-common (taked from CyanogenOS-13.1.5 build_manifest.xml. It's need ?)
+$(call inherit-product, device/cyanogen/msm8937-common/msm8937.mk)
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -60,6 +63,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -95,10 +99,25 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/mixer_paths_qrd_sku1.xml:system/etc/mixer_paths_qrd_sku1.xml \
 	$(LOCAL_PATH)/audio/mixer_paths_qrd_sku2.xml:system/etc/mixer_paths_qrd_sku2.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths_wcd9306.xml:system/etc/sound_trigger_mixer_paths_wcd9306.xml \
+    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths_wcd9326.xml:system/etc/sound_trigger_mixer_paths_wcd9326.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths_wcd9330.xml:system/etc/sound_trigger_mixer_paths_wcd9330.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths_wcd9335.xml:system/etc/sound_trigger_mixer_paths_wcd9335.xml \
     $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml
+
+# Audio calibration
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/acdb/AW87319/MTP_Bluetooth_cal.acdb:system/etc/acdbdata/AW87319/MTP_Bluetooth_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/AW87319/MTP_General_cal.acdb:system/etc/acdbdata/AW87319/MTP_General_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/AW87319/MTP_Global_cal.acdb:system/etc/acdbdata/AW87319/MTP_Global_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/AW87319/MTP_Handset_cal.acdb:system/etc/acdbdata/AW87319/MTP_Handset_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/AW87319/MTP_Hdmi_cal.acdb:system/etc/acdbdata/AW87319/MTP_Hdmi_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/AW87319/MTP_Headset_cal.acdb:system/etc/acdbdata/AW87319/MTP_Headset_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/AW87319/MTP_Speaker_cal.acdb:system/etc/acdbdata/AW87319/MTP_Speaker_cal.acdb
+	
+# Camera
+PRODUCT_PACKAGES += \
+    camera.msm8937
 
 # Display
 PRODUCT_PACKAGES += \
@@ -117,6 +136,10 @@ PRODUCT_COPY_FILES += \
 # Fingerprint
 PRODUCT_PACKAGES += \
     fingerprintd
+
+# First api level, device has been commercially launched
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.first_api_level=23	
 
 # GPS
 PRODUCT_PACKAGES += \
