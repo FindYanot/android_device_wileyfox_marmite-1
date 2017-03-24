@@ -53,7 +53,7 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 -
 # Prebuilt kernel
 #TARGET_PREBUILT_KERNEL := device/wileyfox/marmite/kernel
 # else uncomment below to build from source
-TARGET_KERNEL_ARCH := arm
+TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_APPEND_DTB := true
 TARGET_KERNEL_CONFIG := lineageos_marmite_defconfig
 TARGET_KERNEL_SOURCE := kernel/wileyfox/msm8937
