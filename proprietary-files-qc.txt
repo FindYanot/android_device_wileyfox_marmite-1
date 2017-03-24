@@ -81,7 +81,7 @@ etc/permissions/com.quicinc.cne.xml
 framework/ConnectivityExt.jar
 framework/cneapiclient.jar
 framework/com.quicinc.cne.jar
-priv-app/CNEService/CNEService.apk
+-priv-app/CNEService/CNEService.apk
 vendor/lib/libNimsWrap.so
 vendor/lib/libcne.so
 vendor/lib/libcneapiclient.so
@@ -299,7 +299,7 @@ etc/permissions/dpmapi.xml
 framework/com.qti.dpmframework.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
-priv-app/dpmserviceapp/dpmserviceapp.apk
+-priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/lib/libdpmctmgr.so
 vendor/lib/libdpmfdmgr.so
 vendor/lib/libdpmframework.so
@@ -506,18 +506,18 @@ etc/firmware/a530v3_gpmu.fw2
 etc/firmware/a530v3_seq.fw2
 
 # Keylayout
-usr/keylayout/ft5x06_ts.kl
-usr/keylayout/gpio-keys.kl
-usr/keylayout/qpnp_pon.kl
-usr/keylayout/synaptics_dsx.kl
-usr/keylayout/synaptics_rmi4_i2c.kl
+#usr/keylayout/ft5x06_ts.kl
+#usr/keylayout/gpio-keys.kl
+#usr/keylayout/qpnp_pon.kl
+#usr/keylayout/synaptics_dsx.kl
+#usr/keylayout/synaptics_rmi4_i2c.kl
 
 # Keystore
 vendor/lib/hw/keystore.msm8937.so
 vendor/lib64/hw/keystore.msm8937.so
 
 # Listen
-vendor/lib/hw/sound_trigger.primary.msm8937.so
+#vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
@@ -588,12 +588,12 @@ vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
 # Postprocessing
-etc/permissions/com.qti.snapdragon.sdk.display.xml
-framework/com.qti.snapdragon.sdk.display.jar
--vendor/app/colorservice/colorservice.apk
-vendor/bin/mm-pp-dpps
-vendor/lib/libdisp-aba.so
-vendor/lib64/libdisp-aba.so
+#etc/permissions/com.qti.snapdragon.sdk.display.xml
+#framework/com.qti.snapdragon.sdk.display.jar
+#-vendor/app/colorservice/colorservice.apk
+#vendor/bin/mm-pp-dpps
+#vendor/lib/libdisp-aba.so
+#vendor/lib64/libdisp-aba.so
 
 # QMI
 bin/irsc_util
