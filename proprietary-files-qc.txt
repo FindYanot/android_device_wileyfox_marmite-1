@@ -2,24 +2,9 @@
 bin/adsprpcd
 vendor/lib/libadsprpc.so
 vendor/lib/libadsp_default_listener.so
-vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libfastcvopt.so
 vendor/lib64/libadsprpc.so
 vendor/lib64/libadsp_default_listener.so
-
-# ADSP modules
-#vendor/lib/rfsa/adsp/libadsp_fd_skel.so
-vendor/lib/rfsa/adsp/libapps_mem_heap.so
-vendor/lib/rfsa/adsp/libdspCV_skel.so
-vendor/lib/rfsa/adsp/libfastcvadsp.so
-vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
-vendor/lib/rfsa/adsp/libFastRPC_UTF_Forward_skel.so
-vendor/lib/rfsa/adsp/libobjectMattingApp_skel.so
-vendor/lib/rfsa/adsp/libscveBlobDescriptor_skel.so
-vendor/lib/rfsa/adsp/libscveCleverCapture_skel.so
-vendor/lib/rfsa/adsp/libscveObjectSegmentation_skel.so
-vendor/lib/rfsa/adsp/libscveT2T_skel.so
-vendor/lib/rfsa/adsp/libscveTextReco_skel.so
 
 # Audio
 vendor/lib/libacdb-fts.so
@@ -68,11 +53,11 @@ etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 # Bluetooth
 bin/btnvtool
 bin/hci_qcomm_init
-vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
 
 # CNE
 bin/cnd
+bin/dpmd
 etc/cne/SwimConfig.xml
 etc/cne/andsfCne.xml
 etc/permissions/ConnectivityExt.xml
@@ -100,7 +85,6 @@ vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
 # Camera
-bin/mm-qcamera-app
 bin/mm-qcamera-daemon
 lib/hw/camera.msm8937.so
 lib/libmmcamera_interface.so
@@ -129,17 +113,17 @@ vendor/lib/libmmcamera_optizoom_lib.so
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_ppbase_module.so
-vendor/lib/libmmcamera_qtech_8856_eeprom.so
-vendor/lib/libmmcamera_qtech_gt24c64a_eeprom.so
-vendor/lib/libmmcamera_qtech_z5675ae_eeprom.so
+vendor/lib/libmmcamera_qtech_f3l8yam_eeprom.so
 vendor/lib/libmmcamera_stillmore_lib.so
 vendor/lib/libmmcamera_sw_tnr.so
 vendor/lib/libmmcamera_thread_services.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_trueportrait_lib.so
 vendor/lib/libmmcamera_ubifocus_lib.so
-vendor/lib/libmmcamera_ov5675.so
-vendor/lib/libmmcamera_s5k3p3.so
+vendor/lib/libmmcamera_ov8856.so
+vendor/lib/libmmcamera_ov8865.so
+vendor/lib/libmmcamera_s5k3l8.so
+vendor/lib/libmmcamera_s5k3l8_x50l.so
 vendor/lib/libmmcamera2_c2d_module.so
 vendor/lib/libmmcamera2_cpp_module.so
 vendor/lib/libmmcamera2_dcrf.so
@@ -162,7 +146,6 @@ vendor/lib/libmmsw_detail_enhancement.so
 vendor/lib/libmmsw_math.so
 vendor/lib/libmmsw_opencl.so
 vendor/lib/libmmsw_platform.so
-vendor/lib/libois_lc898122.so
 vendor/lib/liboptizoom.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
@@ -170,8 +153,6 @@ vendor/lib/libqomx_jpegenc.so
 vendor/lib/libseemore.so
 vendor/lib/libtm_interface.so
 vendor/lib/libtrueportrait.so
-vendor/lib/libts_detected_face_hal.so
-vendor/lib/libts_face_beautify_hal.so
 vendor/lib/libubifocus.so
 
 # Camera actuators
@@ -314,11 +295,9 @@ vendor/lib64/libdpmtcm.so
 # DRM
 bin/qseecomd
 vendor/bin/mdtpd
-vendor/bin/qseeproxydaemon
 vendor/lib/libcppf.so
 vendor/lib/liboemcrypto.so
 vendor/lib/libQSEEComAPI.so
-vendor/lib64/lib-sec-disp.so
 vendor/lib64/libGPreqcancel.so
 vendor/lib64/libGPreqcancel_svc.so
 vendor/lib64/libGPTEE.so
@@ -335,11 +314,6 @@ vendor/lib64/libsecureui.so
 vendor/lib64/libsecureui_svcsock.so
 vendor/lib64/libssd.so
 vendor/lib64/libtzdrmgenprov.so
-
-# Display calibration
--etc/qdcm_calib_data_hx8394F_HD720p_video_BOE.xml
--etc/qdcm_calib_data_ili9881c_HD720p_video_Tianma.xml
--etc/qdcm_calib_data_nt35521s_HD720p_video_EBBG.xml
 
 # Fingerprint
 bin/gx_fpcmd
@@ -496,14 +470,8 @@ vendor/lib64/libsdmextension.so
 vendor/lib64/libuiblur.so|4b3fabf5ded7c4af531abde681676fc5e9248494
 
 # Graphics firmware
-etc/firmware/a530_gpmu.fw2
 etc/firmware/a530_pfp.fw
 etc/firmware/a530_pm4.fw
-etc/firmware/a530v1_pfp.fw
-etc/firmware/a530v1_pm4.fw
-etc/firmware/a530v2_seq.fw2
-etc/firmware/a530v3_gpmu.fw2
-etc/firmware/a530v3_seq.fw2
 
 # Keylayout
 #usr/keylayout/ft5x06_ts.kl
@@ -655,7 +623,7 @@ etc/permissions/embms.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/telephonyservice.xml
-framework/embmslibrary.jar
+-framework/embmslibrary.jar
 -framework/qcnvitems.jar
 -framework/qcrilhook.jar
 framework/qti-telephony-common.jar
@@ -738,11 +706,6 @@ bin/time_daemon
 vendor/lib/libTimeService.so
 -vendor/lib64/libtime_genoff.so
 vendor/lib64/libTimeService.so
-
-# Touchscreen
-etc/ft5336_biel_720p.ini
-etc/ft5336_lens_720p.ini
-etc/ft5336_oufei_720p.ini
 
 # USB
 etc/firmware/ice40.bin
