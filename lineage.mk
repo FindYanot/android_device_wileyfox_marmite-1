@@ -25,7 +25,7 @@ $(call inherit-product, device/wileyfox/marmite/device.mk)
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Set those variables here to overwrite the inherited values.
-BOARD_VENDOR := Wileyfox
+BOARD_VENDOR := wileyfox
 PRODUCT_DEVICE := marmite
 PRODUCT_NAME := lineage_marmite
 PRODUCT_BRAND := Wileyfox

@@ -18,7 +18,7 @@
 set -e
 
 DEVICE=marmite
-VENDOR=Wileyfox
+VENDOR=wileyfox
 
 # Load extractutils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
