@@ -23,7 +23,7 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvi
 $(call inherit-product-if-exists, vendor/wileyfox/marmite/marmite-vendor.mk)
 
 # Inherit the rest from msm8937-common (taked from CyanogenOS-13.1.5 build_manifest.xml. It's need ?)
-$(call inherit-product, device/cyanogen/msm8937-common/msm8937.mk)
+# $(call inherit-product, device/cyanogen/msm8937-common/msm8937.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
