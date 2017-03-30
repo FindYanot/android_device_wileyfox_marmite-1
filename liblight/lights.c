@@ -1,7 +1,6 @@
-/*
+*
  * Copyright (C) 2008 The Android Open Source Project
  * Copyright (C) 2014 The  Linux Foundation. All rights reserved.
- * Copyright (C) 2015 BQ
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +21,7 @@
 #include <cutils/log.h>
 
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
@@ -44,6 +44,15 @@ static struct light_state_t g_attention;
 char const*const RED_LED_FILE
         = "/sys/class/leds/red/brightness";
 
+char const*const RED_BLINK_FILE
+	= "/sys/class/leds/red/blink";
+
+char const*const GREEN_BLINK_FILE
+	= "/sys/class/leds/green/blink";
+
+char const*const BLUE_BLINK_FILE
+	= "/sys/class/leds/blue/blink";
+
 char const*const GREEN_LED_FILE
         = "/sys/class/leds/green/brightness";
 
@@ -53,19 +62,16 @@ char const*const BLUE_LED_FILE
 char const*const LCD_FILE
         = "/sys/class/leds/lcd-backlight/brightness";
 
-char const*const BUTTON_FILE
-        = "/sys/class/leds/button-backlight/brightness";
+char const*const RED_BREATH_FILE
+        = "/sys/class/leds/red/led_time";
 
-char const*const RED_BLINK_FILE
-        = "/sys/class/leds/red/blink";
+char const*const GREEN_BREATH_FILE
+        = "/sys/class/leds/green/led_time";
 
-char const*const GREEN_BLINK_FILE
-        = "/sys/class/leds/green/blink";
+char const*const BLUE_BREATH_FILE
+        = "/sys/class/leds/blue/led_time";
 
-char const*const BLUE_BLINK_FILE
-        = "/sys/class/leds/blue/blink";
-
-/*
+/**
  * device methods
  */
 
@@ -98,21 +104,20 @@ write_int(char const* path, int value)
 }
 
 static int
-write_int_on_off_time(char const* path, int value, int on, int off)
+write_str(char const* path, char *value)
 {
     int fd;
     static int already_warned = 0;
 
     fd = open(path, O_RDWR);
     if (fd >= 0) {
-        char buffer[40];
-        int bytes = snprintf(buffer, sizeof(buffer), "%d %d %d\n", value, on, off);
-        ssize_t amt = write(fd, buffer, (size_t)bytes);
+        char buffer[20];
+        ssize_t amt = write(fd, value, (size_t)strlen(value));
         close(fd);
         return amt == -1 ? -errno : 0;
     } else {
         if (already_warned == 0) {
-            ALOGE("write_int failed to open %s\n", path);
+            ALOGE("write_str failed to open %s\n", path);
             already_warned = 1;
         }
         return -errno;
@@ -129,9 +134,8 @@ static int
 rgb_to_brightness(struct light_state_t const* state)
 {
     int color = state->color & 0x00ffffff;
-    return ((77 * ((color >> 16) & 0x00ff))
-            + (150 * ((color >> 8) & 0x00ff))
-            + (29 * (color & 0x00ff))) >> 8;
+    return ((77*((color>>16)&0x00ff))
+            + (150*((color>>8)&0x00ff)) + (29*(color&0x00ff))) >> 8;
 }
 
 static int
@@ -157,6 +161,7 @@ set_speaker_light_locked(struct light_device_t* dev,
     int blink;
     int onMS, offMS;
     unsigned int colorRGB;
+    char breath_pattern[64] = { 0, };
 
     if(!dev) {
         return -1;
@@ -175,7 +180,6 @@ set_speaker_light_locked(struct light_device_t* dev,
             onMS = state->flashOnMS;
             offMS = state->flashOffMS;
             break;
-
         case LIGHT_FLASH_NONE:
         default:
             onMS = 0;
@@ -185,39 +189,58 @@ set_speaker_light_locked(struct light_device_t* dev,
 
     colorRGB = state->color;
 
-#if 0
     ALOGD("set_speaker_light_locked mode %d, colorRGB=%08X, onMS=%d, offMS=%d\n",
             state->flashMode, colorRGB, onMS, offMS);
-#endif
 
     red = (colorRGB >> 16) & 0xFF;
     green = (colorRGB >> 8) & 0xFF;
     blue = colorRGB & 0xFF;
 
-    if (onMS > 0 && offMS > 0) {
-        blink = 1;
-    } else {
-        blink = 0;
+    if (onMS > 0 && offMS > 0 && !(
+          (red == green && green == blue) ||
+          (red == green && blue == 0) ||
+          (red == blue && green == 0) ||
+          (green == blue && red == 0) ||
+          (blue == 0 && red == 0) ||
+          (green == 0 && red == 0) ||
+          (green == 0 && blue == 0)
+       )) {
+       // Blinking only works if all active component colors have
+       // the same brightness value
+       offMS = 0;
     }
 
-    if (blink) {
-        if (red) {
-            if (write_int_on_off_time(RED_BLINK_FILE, red, onMS, offMS))
-                write_int(RED_LED_FILE, 0);
-	}
-        if (green) {
-            if (write_int_on_off_time(GREEN_BLINK_FILE, green, onMS, offMS))
-                write_int(GREEN_LED_FILE, 0);
-	}
-        if (blue) {
-            if (write_int_on_off_time(BLUE_BLINK_FILE, blue, onMS, offMS))
-                write_int(BLUE_LED_FILE, 0);
-	}
+    if (onMS > 0 && offMS > 0) {
+        blink = 1;
+        // Make sure the values are at least 1 second. That's the smallest
+        // we take
+        if (onMS && onMS < 1000) onMS = 1000;
+        if (offMS && offMS < 1000) offMS = 1000;
+        // ramp up, lit, ramp down, unlit. in seconds.
+        sprintf(breath_pattern,"1 %d 1 %d",(int)(onMS/1000),(int)(offMS/1000));
     } else {
-        write_int(RED_LED_FILE, red);
-        write_int(GREEN_LED_FILE, green);
-        write_int(BLUE_LED_FILE, blue);
+        blink = 0;
+        sprintf(breath_pattern,"1 2 1 2");
     }
+
+    // Order of operations matters.
+    //
+    // Setting a pattern jacks up brightness to max, and setting the level
+    // resets blink state. So first set the pattern, then the level,
+    // and then kick off blinkage
+    if (!write_str(RED_BREATH_FILE, breath_pattern)) {
+        write_int(RED_LED_FILE, red);
+    }
+    if (!write_str(GREEN_BREATH_FILE, breath_pattern)) {
+        write_int(GREEN_LED_FILE, green);
+    }
+    if (!write_str(BLUE_BREATH_FILE, breath_pattern)) {
+         write_int(BLUE_LED_FILE, blue);
+    }
+
+    if (red) write_int(RED_BLINK_FILE, blink);
+    if (green) write_int(GREEN_BLINK_FILE, blink);
+    if (blue) write_int(BLUE_BLINK_FILE, blink);
 
     return 0;
 }
@@ -262,6 +285,7 @@ set_light_attention(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     pthread_mutex_lock(&g_lock);
+
     g_attention = *state;
     if (state->flashMode == LIGHT_FLASH_HARDWARE) {
         if (g_attention.flashOnMS > 0 && g_attention.flashOffMS == 0) {
@@ -271,25 +295,13 @@ set_light_attention(struct light_device_t* dev,
         g_attention.color = 0;
     }
     handle_speaker_battery_locked(dev);
+
     pthread_mutex_unlock(&g_lock);
+
     return 0;
 }
 
-static int
-set_light_buttons(struct light_device_t* dev,
-        struct light_state_t const* state)
-{
-    int err = 0;
-    if(!dev) {
-        return -1;
-    }
-    pthread_mutex_lock(&g_lock);
-    err = write_int(BUTTON_FILE, state->color & 0xFF);
-    pthread_mutex_unlock(&g_lock);
-    return err;
-}
-
-/* Close the lights device */
+/** Close the lights device */
 static int
 close_lights(struct light_device_t *dev)
 {
@@ -299,13 +311,14 @@ close_lights(struct light_device_t *dev)
     return 0;
 }
 
+
 /******************************************************************************/
 
-/*
+/**
  * module methods
  */
 
-/* Open a new instance of a lights device using name */
+/** Open a new instance of a lights device using name */
 static int open_lights(const struct hw_module_t* module, char const* name,
         struct hw_device_t** device)
 {
@@ -318,8 +331,6 @@ static int open_lights(const struct hw_module_t* module, char const* name,
         set_light = set_light_battery;
     else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name))
         set_light = set_light_notifications;
-    else if (0 == strcmp(LIGHT_ID_BUTTONS, name))
-        set_light = set_light_buttons;
     else if (0 == strcmp(LIGHT_ID_ATTENTION, name))
         set_light = set_light_attention;
     else
@@ -345,7 +356,7 @@ static int open_lights(const struct hw_module_t* module, char const* name,
 }
 
 static struct hw_module_methods_t lights_module_methods = {
-    .open = open_lights,
+    .open =  open_lights,
 };
 
 /*
@@ -356,7 +367,7 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
     .version_major = 1,
     .version_minor = 0,
     .id = LIGHTS_HARDWARE_MODULE_ID,
-    .name = "BQ lights Module",
+    .name = "lights Module",
     .author = "Google, Inc.",
     .methods = &lights_module_methods,
 };
