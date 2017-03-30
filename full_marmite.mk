@@ -22,7 +22,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Inherit from kipper device
-$(call inherit-product, device/wileyfox/marmite/marmite.mk)
+$(call inherit-product, device/wileyfox/marmite/device.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := marmite
