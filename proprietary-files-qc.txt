@@ -526,7 +526,6 @@ vendor/lib64/libconnctrl.so
 vendor/lib64/libQtiTether.so
 
 # Perf
-bin/iop
 bin/msm_irqbalance
 lib64/libqti-iop.so
 lib64/libqti_performance.so
