@@ -34,21 +34,21 @@ vendor/lib64/libaudiodevarb.so
 vendor/lib64/libswvdec.so
 
 # Audio ACDB
-etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
-etc/acdbdata/MTP/MTP_General_cal.acdb
-etc/acdbdata/MTP/MTP_Global_cal.acdb
-etc/acdbdata/MTP/MTP_Handset_cal.acdb
-etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
-etc/acdbdata/MTP/MTP_Headset_cal.acdb
-etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+#etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
+#etc/acdbdata/MTP/MTP_General_cal.acdb
+#etc/acdbdata/MTP/MTP_Global_cal.acdb
+#etc/acdbdata/MTP/MTP_Handset_cal.acdb
+#etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
+#etc/acdbdata/MTP/MTP_Headset_cal.acdb
+#etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 
-#etc/acdbdata/AW87319/MTP_Bluetooth_cal.acdb
-#etc/acdbdata/AW87319/MTP_General_cal.acdb
-#etc/acdbdata/AW87319/MTP_Global_cal.acdb
-#etc/acdbdata/AW87319/MTP_Handset_cal.acdb
-#etc/acdbdata/AW87319/MTP_Hdmi_cal.acdb
-#etc/acdbdata/AW87319/MTP_Headset_cal.acdb
-#etc/acdbdata/AW87319/MTP_Speaker_cal.acdb
+etc/acdbdata/AW87319/MTP_Bluetooth_cal.acdb
+etc/acdbdata/AW87319/MTP_General_cal.acdb
+etc/acdbdata/AW87319/MTP_Global_cal.acdb
+etc/acdbdata/AW87319/MTP_Handset_cal.acdb
+etc/acdbdata/AW87319/MTP_Hdmi_cal.acdb
+etc/acdbdata/AW87319/MTP_Headset_cal.acdb
+etc/acdbdata/AW87319/MTP_Speaker_cal.acdb
 
 # Bluetooth
 bin/btnvtool
@@ -599,8 +599,6 @@ vendor/lib64/libquipc_os_api.so
 vendor/lib64/libsmemlog.so
 
 # Radio
--app/datastatusnotification/datastatusnotification.apk
--app/fastdormancy/fastdormancy.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
 -app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
