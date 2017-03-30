@@ -341,9 +341,7 @@ etc/sap.conf
 etc/xtwifi.conf
 -framework/com.qti.location.sdk.jar
 lib/libloc_api_v02.so
-lib/libloc_ds_api.so
 lib64/libloc_api_v02.so
-lib64/libloc_ds_api.so
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/bin/slim_daemon
 vendor/lib/hw/flp.default.so
@@ -618,7 +616,6 @@ etc/permissions/embms.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/telephonyservice.xml
--framework/embmslibrary.jar
 -framework/qcnvitems.jar
 -framework/qcrilhook.jar
 framework/qti-telephony-common.jar
