@@ -1,7 +1,5 @@
-/**
- * Copyright (C) 2012 The Android Open Source Project
- * Copyright (C) 2016 The CyanogenMod Project
- * Copyright (C) 2017 The LineageOS Project
+/*
+ * Copyright (C) 2015 The CyanogenMod Project <http://www.cyanogenmod.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +18,6 @@
 #define _BDROID_BUILDCFG_H
 
 #define BTM_DEF_LOCAL_NAME   "Wileyfox Swift 2"
-
+#define BLUETOOTH_QTI_SW TRUE
 #define BLE_VND_INCLUDED   TRUE
-#define BT_CLEAN_TURN_ON_DISABLED 1
 #endif
