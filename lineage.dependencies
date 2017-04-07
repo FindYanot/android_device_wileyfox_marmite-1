@@ -1,10 +1,6 @@
 [
-  {
-    "repository": "android_device_cyanogen_msm8937-common",
-    "target_path": "device/cyanogen/msm8937-common"
-  },
-  {
-    "repository": "android_kernel_wileyfox_msm8937",
-    "target_path": "kernel/wileyfox/msm8937"
-  }
+ {
+   "repository":"android_device_qcom_common",
+   "target_path":"device/qcom/common"
+ }
 ]
