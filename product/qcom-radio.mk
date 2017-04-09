@@ -7,6 +7,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/vendor/lib64/libril-qc-qmi-1.so \
     ro.telephony.default_network=9,1
 
+# IRQ
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf
+
+	
 # RIL
 ifeq ($(QCPATH),)
 PRODUCT_COPY_FILES += \
